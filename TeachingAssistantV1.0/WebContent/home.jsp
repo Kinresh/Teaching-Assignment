@@ -18,10 +18,7 @@ if(session.getAttribute("name") == null)
 header
 </h1>
 <a href="papa.php?a=1">Add New User</a>
-<span>  |  </span>
-<!-- <a href="papa.php?a=2">triji record</a> -->
-<a href="papa.php?a=5">Add New Country</a>
-<span>  |  </span>
+<span> | </span>
 <a href="papa.php?a=6">Add New Specialization</a>
 <span> | </span>
 <a href="papa.php?a=3">View All Users(Admin)</a>
