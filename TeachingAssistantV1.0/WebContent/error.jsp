@@ -1,1 +1,1 @@
-<h1>Error!!! Something Went Wrong.</h1>
+<h1>Error!!! Something Went Wrong. Pleaase try again.</h1>
