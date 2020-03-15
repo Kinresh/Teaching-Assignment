@@ -13,7 +13,7 @@ public class util {
 		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "root", "root");
 		}
 		catch (ClassNotFoundException e) {
 			System.out.println("class ma error 6!!");
