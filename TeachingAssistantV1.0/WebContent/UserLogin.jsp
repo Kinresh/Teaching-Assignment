@@ -21,13 +21,13 @@ if(session.getAttribute("msg") != null)
 
 
 
-<form action="insert.php" method="post">
+<form action="register.php" method="post">
 
-<input type="text" name="fname" placeholder="Enter username"/>
-<input type="password" name="number" placeholder="Enter password"/>
+<input type="text" name="username" placeholder="Enter username or email"/>
+<input type="password" name="password" placeholder="Enter password"/>
 
 
-<input type="submit" name="action" value="Login"/>
+<input type="submit" name="q" value="Login"/>
 
 </form>
 
