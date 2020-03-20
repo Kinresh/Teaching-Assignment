@@ -20,6 +20,7 @@ import com.abc.model.userModel;
 public class fileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//papa.php
 	public fileController() {
 		super();
 
@@ -102,6 +103,9 @@ public class fileController extends HttpServlet {
 			l = d.diss();
 			request.setAttribute("list", l);
 			h = "home.jsp?p=eview";
+			break;
+		case 101:
+			h = "UserLogin.jsp";
 			break;
 		default:
 			break;

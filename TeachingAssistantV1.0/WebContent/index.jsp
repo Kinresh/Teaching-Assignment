@@ -1,3 +1,3 @@
-<jsp:forward page="papa.php">
-<jsp:param value="40" name="a"/>
+<jsp:forward page="register.php">
+<jsp:param value="login" name="q"/>
 </jsp:forward>

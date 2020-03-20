@@ -9,8 +9,9 @@ response.setHeader("Expires", "0");
 
 if(session.getAttribute("name") == null)
 {
-	response.sendRedirect("papa.php?a=40");
+	response.sendRedirect("papa.php?a=101");
 }
+
 %>
 <h1>welcome,${sessionScope.name}</h1>
 
@@ -21,7 +22,20 @@ header
 <span> | </span>
 <a href="papa.php?a=6">Add New Specialization</a>
 <span> | </span>
-<a href="papa.php?a=3">View All Users(Admin)</a>
+
+<c:if test="${sessionScope.role eq 'admin'}">
+<a href="forward?q=displayallusers">View All Users</a>
+</c:if>
+
+<span> | </span>
+<a href="forward?q=displayallsubjects">Display All Subjects</a>
+<span> | </span>
+<a href="forward?q=addnewsubject">Add New Subject</a>
+
+<span> | </span>
+<a href="forward?q=displayallprograms">Display All Programs</a>
+<span> | </span>
+<a href="forward?q=addnewprogram">Add New Program</a>
 <span> | </span>
 <a href="papa.php?a=4">View Active Users</a>
 <span> | </span>
