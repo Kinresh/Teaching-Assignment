@@ -103,7 +103,6 @@ public class registerController extends HttpServlet {
 
 				UserDetailsModel u = new UserDetailsModel(username,password);
 				List dataList = d.VerifyUser(u);
-				System.out.println("verify user output:"+dataList.get(0));
 				switch ((String) dataList.get(0)) {
 				case "success":
 					u = (UserDetailsModel) dataList.get(1);
@@ -111,17 +110,17 @@ public class registerController extends HttpServlet {
 					ses.setAttribute("name", u.getUserName());
 					ses.setAttribute("email", u.getUserEmail());
 					ses.setAttribute("role", u.getUserRole());
-					response.sendRedirect("papa.php?a=0");
+					response.sendRedirect("home");
 					break;
 				case "unauthorized":
 					ses.setAttribute("msg", "You are Unauthorized by admin to login!!");
 
-					response.sendRedirect("papa.php?a=40");
+					response.sendRedirect("register.php?q=login");
 					break;
 				case "nouserfound":
 					ses.setAttribute("msg", "Incorrect Username or Password!!");
 
-					response.sendRedirect("papa.php?a=40");
+					response.sendRedirect("register.php?q=login");
 					break;
 				default:
 					break;

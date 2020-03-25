@@ -64,4 +64,24 @@
     <servlet-name>subjectController</servlet-name>
     <url-pattern>/subject</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>scheduleController</display-name>
+    <servlet-name>scheduleController</servlet-name>
+    <servlet-class>com.abc.controller.scheduleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>scheduleController</servlet-name>
+    <url-pattern>/schedule</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>homeController</display-name>
+    <servlet-name>homeController</servlet-name>
+    <servlet-class>com.abc.controller.homeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>homeController</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
 </web-app>

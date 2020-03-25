@@ -94,7 +94,7 @@ public class insertController extends HttpServlet {
 			HttpSession ses=request.getSession();
 			
 			ses.setAttribute("msg","successfully logout !!");
-			response.sendRedirect("papa.php?a=101");
+			response.sendRedirect("register.php?q=login");
 			
 			break;
 		default:

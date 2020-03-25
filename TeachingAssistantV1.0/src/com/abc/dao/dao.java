@@ -1,15 +1,7 @@
 package com.abc.dao;
 
 import java.util.List;
-
-import com.abc.model.ProgramModel;
-import com.abc.model.SubjectModel;
-import com.abc.model.UserDetailsModel;
-import com.abc.model.childModel;
-import com.abc.model.countryModel;
-import com.abc.model.hobbieModel;
-import com.abc.model.masterModel;
-import com.abc.model.userModel;
+import com.abc.model.*;
 
 public interface dao {
 
@@ -51,6 +43,23 @@ public interface dao {
 	boolean deleteProgram(int id);
 	boolean enableProgram(int id);
 	boolean disableProgram(int id);
+	List<ProgramTimelineModel> getAllProgramTimelines();
+	boolean inserNewProgramTimeline(ProgramTimelineModel pt);
+	ProgramTimelineModel getProgramTimeline(int id);
+	boolean updateProgramTimeline(ProgramTimelineModel pt);
+	boolean deleteProgramTimeline(int id);
+	boolean enableProgramTimeline(int id);
+	boolean disableProgramTimeline(int id);
+	boolean addSchedule(ScheduleModel s);
+	List<ScheduleModel> getAllSchedules();
+	List<TermModel> getAllTerms();
+	boolean addSubjectTerm(SubjectTermModel stm);
+	List<SubjectTermModel> getSubjectTerms_scheduleID(int scheduleID);
+	List<PriorityModel> getAllPriorities();
+	boolean addNewFacultySelection(FacultySelectionModel fs);
+	List<UserDetailsModel> getAllFaculties();
+	List<FacultySelectionDisplayModel> getAllFacultySelection_scheduleID(int scheduleID);
+	boolean deleteFacultySelection(int userID);
 
 	
 }

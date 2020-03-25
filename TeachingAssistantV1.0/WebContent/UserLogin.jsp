@@ -22,7 +22,6 @@ if(session.getAttribute("msg") != null)
 
 
 <form action="register.php" method="post">
-
 <input type="text" name="username" placeholder="Enter username or email"/>
 <input type="password" name="password" placeholder="Enter password"/>
 
