@@ -73,7 +73,7 @@ programs =(ArrayList) request.getAttribute("programs");
 
 <th>PROGRAM-NAME</th>
 
-<th>Total Terms</th>
+<th>TOTAL TERMS</th>
 
 <th>OFFERED IN</th>
 

@@ -1,5 +1,3 @@
 <h1>
-5555555555555
-Sorry, you entered wrong input.
-7777777777777
+Something went wrong. Please try again.
 </h1>

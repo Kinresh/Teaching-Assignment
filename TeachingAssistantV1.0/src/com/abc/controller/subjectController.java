@@ -1,6 +1,7 @@
 package com.abc.controller;
 
 import java.io.IOException;
+
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.dao.dao;
 import com.abc.daoImpl.daoImpl;
-import com.abc.model.ProgramModel;
-import com.abc.model.SubjectModel;
+import com.abc.model.*;
 
 public class subjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -113,6 +113,57 @@ public class subjectController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 			break;
+		case "deleteprogramtimeline":
+			id = Integer.parseInt(request.getParameter("id"));
+			b = d.deleteProgramTimeline(id);
+			if (b) {
+				response.sendRedirect("forward?q=displayallprogramtimelines");
+			} else {
+				response.sendRedirect("error.jsp");
+			}
+			break;
+		case "enableprogramtimeline":
+			id = Integer.parseInt(request.getParameter("id"));
+			b = d.enableProgramTimeline(id);
+			if (b) {
+				response.sendRedirect("forward?q=displayallprogramtimelines");
+			} else {
+				response.sendRedirect("error.jsp");
+			}
+			break;
+		case "disableprogramtimeline":
+			id = Integer.parseInt(request.getParameter("id"));
+			b = d.disableProgramTimeline(id);
+			if (b) {
+				response.sendRedirect("forward?q=displayallprogramtimelines");
+			} else {
+				response.sendRedirect("error.jsp");
+			}
+			break;
+		case "multipledeleteprogramtimelines":
+			ids = request.getParameter("ids");
+			h = ids.split(",");
+			for (int c = 0; c < h.length; c++) {
+				b = d.deleteProgramTimeline(Integer.parseInt(h[c]));
+				if (!b)
+					break;
+			}
+			if (b) {
+				response.sendRedirect("forward?q=displayallprogramtimlines");
+			} else {
+				response.sendRedirect("error.jsp");
+			}
+			break;
+		case "programtimelineterms":
+			id = Integer.parseInt(request.getParameter("id"));
+			//b = d.getTermsFromPtID(id);
+			if (b) {
+				response.sendRedirect("forward?q=displayallprogramtimelines");
+			} else {
+				response.sendRedirect("error.jsp");
+			}
+			break;
+			
 		default:
 			break;
 		}
@@ -171,7 +222,6 @@ public class subjectController extends HttpServlet {
 
 			ProgramModel program = new ProgramModel(programName, totalTerms, 0, 0, 0);
 			for (String s : offeredTerms) {
-				System.out.println("sssssssss: "+s);
 				if (s.equals("winter")) {
 					program.setWinter(1);
 				}
@@ -221,6 +271,48 @@ public class subjectController extends HttpServlet {
 			b = d.updateProgram(program);
 			if (b) {
 				page = "forward?q=displayallprograms";
+			} else {
+				page = "error.jsp";
+			}
+			break;
+
+		case "addnewprogramtimeline":
+			int programID = Integer.parseInt(request.getParameter("programID"));
+			String startingTerm = request.getParameter("startingTerm");
+			String startingYear = request.getParameter("startingYear");
+
+			ProgramTimelineModel pt = new ProgramTimelineModel(programID,startingTerm,startingYear);
+			
+			pt.setCreatedDate(new Date());
+			ses = request.getSession(true);
+			if (ses != null) {
+				pt.setCreatedBy(ses.getAttribute("name").toString());
+			}
+			b = d.inserNewProgramTimeline(pt);
+			if (b) {
+				page = "forward?q=displayallprogramtimelines";
+			} else {
+				page = "error.jsp";
+			}
+			break;
+
+		case "updateprogramtimeline":
+
+			int ptID = Integer.parseInt(request.getParameter("ptID"));
+			programID = Integer.parseInt(request.getParameter("programID"));
+			startingTerm = request.getParameter("startingTerm");
+			startingYear = request.getParameter("startingYear");
+
+			pt = new ProgramTimelineModel(ptID,programID,startingTerm,startingYear);
+			
+			pt.setUpdatedDate(new Date());
+			ses = request.getSession(true);
+			if (ses != null) {
+				pt.setUpdatedBy(ses.getAttribute("name").toString());
+			}
+			b = d.updateProgramTimeline(pt);
+			if (b) {
+				page = "forward?q=displayallprogramtimelines";
 			} else {
 				page = "error.jsp";
 			}

@@ -2,6 +2,7 @@ package com.abc.daoImpl;
 
 import java.sql.CallableStatement;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.abc.dao.dao;
+import com.abc.model.FacultySelectionDisplayModel;
+import com.abc.model.FacultySelectionModel;
+import com.abc.model.PriorityModel;
 import com.abc.model.ProgramModel;
+import com.abc.model.ProgramTimelineModel;
+import com.abc.model.ScheduleModel;
 import com.abc.model.SubjectModel;
+import com.abc.model.SubjectTermModel;
+import com.abc.model.TermModel;
 import com.abc.model.UserDetailsModel;
 import com.abc.model.childModel;
 import com.abc.model.countryModel;
@@ -525,8 +533,8 @@ public class daoImpl implements dao {
 			con = r.getConnection();
 			if (con != null) {
 				st = con.createStatement();
-				rs = st.executeQuery("select * from users where (userName = '" + u.getUserName() + "' OR userEmail = '"
-						+ u.getUserName() + "') AND userPassword = '" + u.getUserPassword() + "'");
+				rs = st.executeQuery("select * from users where (userName = '" + u.getUserName() + "' COLLATE utf8mb4_0900_as_cs OR userEmail = '"
+						+ u.getUserName() + "' COLLATE utf8mb4_0900_as_cs) AND userPassword = '" + u.getUserPassword() + "' COLLATE utf8mb4_0900_as_cs");
 
 				if (rs.next()) {
 					if (rs.getInt("active") == 1) {
@@ -585,7 +593,7 @@ public class daoImpl implements dao {
 	}
 
 	private boolean customExecuteUpdate(String query) {
-		try {			
+		try {
 			con = r.getConnection();
 			if (con != null) {
 				st = con.createStatement();
@@ -839,4 +847,328 @@ public class daoImpl implements dao {
 	public boolean disableProgram(int id) {
 		return customExecuteUpdate("update programs set active_flag= '0' where programID = '" + id + "'");
 	}
+
+	@Override
+	public List<ProgramTimelineModel> getAllProgramTimelines() {
+		List<ProgramTimelineModel> l = new ArrayList<>();
+		ProgramTimelineModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from program_timeline");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new ProgramTimelineModel(rs.getInt("ptID"), rs.getInt("programID"),
+								rs.getString("startingTerm"), rs.getString("startingYear"), rs.getInt("active_flag"),
+								rs.getString("createdBy"), rs.getDate("createdDate"), rs.getString("updatedBy"),
+								rs.getDate("updatedDate"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+
+	}
+
+	@Override
+	public boolean inserNewProgramTimeline(ProgramTimelineModel s) {
+		return customExecuteUpdate(
+				"INSERT INTO program_timeline (programID,startingTerm,startingYear,createdBy,createdDate)" + "VALUES ('"
+						+ s.getProgramID() + "','" + s.getStartingTerm() + "','" + s.getStartingYear() + "','"
+						+ s.getCreatedBy() + "','" + s.getCreatedDate() + "')");
+	}
+
+	@Override
+	public ProgramTimelineModel getProgramTimeline(int id) {
+		ProgramTimelineModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from program_timeline where ptID = '" + id + "'");
+				if (rs != null) {
+					if (rs.next()) {
+						m = new ProgramTimelineModel(rs.getInt("ptID"), rs.getInt("programID"),
+								rs.getString("startingTerm"), rs.getString("startingYear"), rs.getInt("active_flag"),
+								rs.getString("createdBy"), rs.getDate("createdDate"), rs.getString("updatedBy"),
+								rs.getDate("updatedDate"));
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return m;
+
+	}
+
+	@Override
+	public boolean updateProgramTimeline(ProgramTimelineModel s) {
+		return customExecuteUpdate("update program_timeline set programID='" + s.getProgramID() + "',startingTerm='"
+				+ s.getStartingTerm() + "',startingYear='" + s.getStartingYear() + "',updatedBy='" + s.getUpdatedBy()
+				+ "',updatedDate='" + s.getUpdatedDate() + "' where ptID = '" + s.getPtID() + "'");
+	}
+
+	public boolean deleteProgramTimeline(int id) {
+		return customExecuteUpdate("delete from program_timline where ptID = '" + id + "'");
+	}
+
+	@Override
+	public boolean enableProgramTimeline(int id) {
+		return customExecuteUpdate("update program_timline set active_flag= '1' where ptID = '" + id + "'");
+	}
+
+	@Override
+	public boolean disableProgramTimeline(int id) {
+		return customExecuteUpdate("update program_timline set active_flag= '0' where ptID = '" + id + "'");
+	}
+
+	@Override
+	public boolean addSchedule(ScheduleModel s) {
+		return customExecuteUpdate("insert into schedule_year(name, year) Values ('"+s.getName()+"','"+s.getYear()+"')");
+	}
+
+	@Override
+	public List<ScheduleModel> getAllSchedules() {
+		List<ScheduleModel> l = new ArrayList<>();
+		ScheduleModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from schedule_year");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new ScheduleModel(rs.getInt("syID"), rs.getString("name"),
+								rs.getString("year"), rs.getInt("active_flag"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+
+	}
+
+	@Override
+	public List<TermModel> getAllTerms() {
+		List<TermModel> l = new ArrayList<>();
+		TermModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from web_terms where active_flag = '1'");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new TermModel(rs.getInt("web_termID"), rs.getString("name"),rs.getInt("active_flag"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+	}
+
+	@Override
+	public boolean addSubjectTerm(SubjectTermModel s) {
+		return customExecuteUpdate("insert into subject_term(subjectID,web_termsID,syID,notes) Values ('"+s.getSubjectID()+"','"+s.getWeb_termsID()+"','"+s.getSyID()+"','"+s.getNotes()+"')");
+	}
+
+	@Override
+	public List<SubjectTermModel> getSubjectTerms_scheduleID(int scheduleID) {
+		List<SubjectTermModel> l = new ArrayList<>();
+		SubjectTermModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from subject_term where syID = '"+scheduleID+"'");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new SubjectTermModel(
+								rs.getInt("stID"),
+								rs.getInt("subjectID"),
+								rs.getInt("web_termsID"),
+								rs.getInt("syID"),
+								rs.getString("notes"),
+								rs.getInt("active_flag"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+		
+	}
+
+	@Override
+	public List<PriorityModel> getAllPriorities() {
+		List<PriorityModel> l = new ArrayList<>();
+		PriorityModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from web_priorities where active_flag='1'");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new PriorityModel(
+								rs.getInt("priorityID"),
+								rs.getString("description"),
+								rs.getInt("active_flag"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+	}
+
+	@Override
+	public boolean addNewFacultySelection(FacultySelectionModel s) {
+		return customExecuteUpdate("insert into faculty_selection(userID,syID,stID,priorityID) Values('"+s.getUserID()+"','"+s.getSyID()+"','"+s.getStID()+"','"+s.getPriorityID()+"')");
+	}
+
+	@Override
+	public List<UserDetailsModel> getAllFaculties() {
+		List<UserDetailsModel> allUsers = new ArrayList<>();
+		UserDetailsModel user = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select * from users where userRole='faculty'");
+				if (rs != null) {
+					while (rs.next()) {
+						user = new UserDetailsModel(rs.getInt("userID"), rs.getString("userName"),
+								rs.getString("userEmail"), rs.getString("userPassword"), rs.getDate("userDob"),
+								rs.getString("userContact"), rs.getString("userRole"), (byte) rs.getInt("active"),
+								rs.getString("userCountry"), rs.getString("userAddress"), rs.getDate("lastUpdated"),
+								rs.getString("updatedBy"), rs.getDate("createdDate"), rs.getString("createdBy"),
+								rs.getString("userDepartment"), rs.getString("gender"));
+						allUsers.add(user);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return allUsers;
+
+	}
+
+	@Override
+	public List<FacultySelectionDisplayModel> getAllFacultySelection_scheduleID(int scheduleID) {
+		List<FacultySelectionDisplayModel> l = new ArrayList<>();
+		FacultySelectionDisplayModel m = null;
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select a.stID,a.userID,e.userName, b.subjectID, c.subjectName, c.subjectCode,b.web_termsID, d.priorityID, d.description "
+						+ "from demo.faculty_selection as a "
+						+ "left join demo.subject_term as b on b.stID = a.stID "
+						+ "left join demo.subjects as c on c.subjectID = b.subjectID "
+						+ "left join demo.web_priorities as d on d.priorityID=a.priorityID "
+						+ "left join demo.users as e on e.userID = a.userID "
+						+ "where a.syID='"+scheduleID+"'");
+				if (rs != null) {
+					while (rs.next()) {
+						m = new FacultySelectionDisplayModel(
+								rs.getInt("stID"),
+								rs.getInt("userID"),
+								rs.getString("userName"),
+								rs.getInt("subjectID"),
+								rs.getString("subjectName"),
+								rs.getString("subjectCode"),
+								rs.getInt("web_termsID"),
+								rs.getInt("priorityID"),
+								rs.getString("description"));
+						l.add(m);
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+
+		return l;
+	}
+
+	@Override
+	public boolean deleteFacultySelection(int userID) {
+		return customExecuteUpdate("delete from demo.faculty_selection where userID ='"+userID+"';");
+	}
+
+	
+
+
 }

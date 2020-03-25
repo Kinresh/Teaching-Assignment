@@ -43,12 +43,13 @@ public class fileController extends HttpServlet {
 			List<hobbieModel> l22 = d.dish();
 			request.setAttribute("list2", l22);
 
-			h = "home.jsp";
+			h="home.jsp";
+			//response.sendRedirect("home");
 
 			break;
 		
 		case 40:
-			h = "login.jsp";
+			h = "UserLogin.jsp";
 
 			break;
 		case 56:
