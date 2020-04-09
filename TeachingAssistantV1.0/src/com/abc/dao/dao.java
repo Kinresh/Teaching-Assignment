@@ -60,6 +60,8 @@ public interface dao {
 	List<UserDetailsModel> getAllFaculties();
 	List<FacultySelectionDisplayModel> getAllFacultySelection_scheduleID(int scheduleID);
 	boolean deleteFacultySelection(int userID);
+	void emptySchedule(int scheduleID);
+	String getScheduleName(int scheduleID);
 
 	
 }

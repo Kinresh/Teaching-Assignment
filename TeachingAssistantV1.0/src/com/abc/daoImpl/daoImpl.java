@@ -928,17 +928,17 @@ public class daoImpl implements dao {
 	}
 
 	public boolean deleteProgramTimeline(int id) {
-		return customExecuteUpdate("delete from program_timline where ptID = '" + id + "'");
+		return customExecuteUpdate("delete from program_timeline where ptID = '" + id + "'");
 	}
 
 	@Override
 	public boolean enableProgramTimeline(int id) {
-		return customExecuteUpdate("update program_timline set active_flag= '1' where ptID = '" + id + "'");
+		return customExecuteUpdate("update program_timeline set active_flag= '1' where ptID = '" + id + "'");
 	}
 
 	@Override
 	public boolean disableProgramTimeline(int id) {
-		return customExecuteUpdate("update program_timline set active_flag= '0' where ptID = '" + id + "'");
+		return customExecuteUpdate("update program_timeline set active_flag= '0' where ptID = '" + id + "'");
 	}
 
 	@Override
@@ -1166,6 +1166,37 @@ public class daoImpl implements dao {
 	@Override
 	public boolean deleteFacultySelection(int userID) {
 		return customExecuteUpdate("delete from demo.faculty_selection where userID ='"+userID+"';");
+	}
+
+	@Override
+	public void emptySchedule(int userID) {
+		customExecuteUpdate("delete from demo.subject_term where syID ='"+userID+"';");
+	}
+
+	@Override
+	public String getScheduleName(int scheduleID) {
+		String scheduleName= "";
+		try {
+			con = r.getConnection();
+			if (con != null) {
+				st = con.createStatement();
+				rs = st.executeQuery("select name from schedule_year where syID='"+scheduleID+"'");
+				if (rs != null) {
+					while (rs.next()) {
+						scheduleName = rs.getString("name");
+					}
+
+				} else {
+					System.out.println("khali 6 pakit");
+				}
+			} else {
+				System.out.println("connection null 6!!");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.out.println("query ma bhul 6!!");
+		}
+		return scheduleName;
 	}
 
 	

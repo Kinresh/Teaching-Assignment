@@ -62,12 +62,33 @@ int i = 1;
 List<ProgramModel> programs = null;
 programs =(ArrayList) request.getAttribute("programs");
 %>
-<input type="button" onclick="deleteSelected()" value="Delete Selected" />
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Programs
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
+
+<!-- <input type="button" onclick="deleteSelected()" value="Delete Selected" /> -->
 <input type="button" onclick="window.location.href = 'forward?q=addnewprogram'" value="Add New Program" />
-<table border="1">
+<table class="table table-striped table-bordered table-hover " id="sample_6">
+<thead>
 <tr>
 
-<th>CHECKBOX</th>
+<!-- <th>CHECKBOX</th> -->
 
 <th>SR NO.</th>
 
@@ -80,6 +101,8 @@ programs =(ArrayList) request.getAttribute("programs");
 <th>ACTION</th>
 
 </tr>
+</thead>
+<tbody>
 <%
 if(programs != null)
 {
@@ -88,7 +111,7 @@ for(int k = 0;k<programs.size();k++)
 %>
 <tr>
 
-<td><input type="checkbox" name="select" value="<%= programs.get(k).getProgramID() %>"/></td>
+<%-- <td><input type="checkbox" name="select" value="<%= programs.get(k).getProgramID() %>"/></td> --%>
 
 <td><%=i%></td>
 
@@ -155,4 +178,13 @@ else{
 	<% 
 }
 %>
+</tbody>
 </table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

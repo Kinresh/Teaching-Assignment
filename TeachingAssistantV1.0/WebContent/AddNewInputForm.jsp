@@ -24,6 +24,27 @@ function validateForm() {
 <%@page import="com.abc.model.ScheduleModel"%>
 
 <%@page import="java.util.List"%>
+
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	New Form Details
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
+
 <form action="schedule" method="post" onsubmit="return validateForm()" name="myForm">
 
 <input type="hidden" name="q" value="addnewinputform" />
@@ -39,7 +60,7 @@ terms = (ArrayList) request.getAttribute("terms");
 int totalTerms = terms.size();
 %>
 
-<select name="schedule">
+<select name="schedule" class="form-control selectc1">
 <option value="">select schedule</option>
 <%
 if(schedules != null)
@@ -54,16 +75,19 @@ for(int k = 0;k<schedules.size();k++)
 %>
 </select>
 
-<table border="1">
+<br>
+<br>
+
+<table border="1" class="tablec1">
 <tr>
-<th>COURSE</th>
+<th  style="width: 10%;">COURSE</th>
 <%
 if(terms!=null)
 {
 for(int k=0 ; k<terms.size(); k++)
 {
 %>
-<th><%=terms.get(k).getName() %></th>
+<th style="width: 30%;"><%=terms.get(k).getName() %></th>
 <%
 }
 }
@@ -82,8 +106,11 @@ for(int j=0; j<totalTerms; j++)
 {
 %>
 	<td>
-	<input type="checkbox" name="selection" style="width:165px;" value="<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" onClick="displayNotes(this.value);"/>
-	<input type="text" name="notes<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" id="<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" style="display: none;" placeholder="enter note"/>
+	<label class="switch">
+		<input type="checkbox" name="selection" value="<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" onClick="displayNotes(this.value);"/>
+		<span class="slider round"></span>
+	</label>
+	<input type="text" class="widthc2 form-control" style="margin: auto;display: none;" name="notes<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" id="<%=subjects.get(k).getSubjectID()%>,<%=terms.get(j).getWeb_termID() %>" style="display: none;" placeholder="Note(optional)"/>
 	</td>
 <%
 }
@@ -101,9 +128,17 @@ else
 %>
 </table>
 
+<br>	
 
-
-<input type="submit" value="Create Form"/>
-<input type="reset" value="Cancel"/>
+<input type="submit" class="btn btn-success" value="Create Form"/>
+<input type="reset" class="btn btn-light" value="Cancel"/>
 
 </form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

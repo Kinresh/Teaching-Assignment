@@ -5,9 +5,31 @@
 </head>
 <body>
 
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	New Schedule Details
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
 <form action="schedule" method="post">
-<input type="text" name="scheduleName" placeholder="Enter Schedule Name"/>
-<select name="year">
+Schedule Name:
+<input type="text" name="scheduleName" class="widthc1 form-control"  placeholder="Enter Schedule Name"/>
+<div class="spacec1"></div>
+Year: 
+<select name="year" class="form-control selectc1">
 <option value="0">Select Year</option>
 <option value="2020">2020</option>
 <option value="2021">2021</option>
@@ -22,10 +44,21 @@
 <option value="2030">2030</option>
 </select>
 
+<br>
+<BR>
 <input type="hidden" name="q" value="addnewschedule"/>
-<input type="submit" value="Create Schedule" />
-<input type="reset" value="Reset" />
+<input type="submit" class="btn btn-success" value="Create Schedule" />
+<input type="reset" class="btn btn-success" value="Reset" />
 </form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 </body>
 </html>

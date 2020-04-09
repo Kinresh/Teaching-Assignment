@@ -93,7 +93,7 @@ public class insertController extends HttpServlet {
 			session.invalidate();
 			HttpSession ses=request.getSession();
 			
-			ses.setAttribute("msg","successfully logout !!");
+			ses.setAttribute("msg","Successfully Logged Out");
 			response.sendRedirect("register.php?q=login");
 			
 			break;

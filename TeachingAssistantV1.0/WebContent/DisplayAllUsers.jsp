@@ -57,16 +57,38 @@ function deleteSelected()
 	else
 		alert("No account selected.");
 }</script>
+
 <%
 int i = 1;
 List<UserDetailsModel> users = null;
 users =(ArrayList) request.getAttribute("users");
 %>
-<input type="button" onclick="deleteSelected()" value="Delete Selected" />
-<table border="1">
+<!-- <input type="button" onclick="deleteSelected()" value="Delete Selected" /> -->
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Users
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
+
+<table class="table table-striped table-bordered table-hover " id="sample_6">
+<thead>
 <tr>
 
-<th>CHECKBOX</th>
+<!-- <th>CHECKBOX</th> -->
 
 <th>SR NO.</th>
 
@@ -83,6 +105,8 @@ users =(ArrayList) request.getAttribute("users");
 <th>ACTION</th>
 
 </tr>
+</thead>
+<tbody>
 <%
 if(users != null)
 {
@@ -91,7 +115,7 @@ for(int k = 0;k<users.size();k++)
 %>
 <tr>
 
-<td><input type="checkbox" name="select" value="<%= users.get(k).getUserID() %>"/></td>
+<%-- <td><input type="checkbox" name="select" value="<%= users.get(k).getUserID() %>"/></td> --%>
 
 <td><%=i%></td>
 
@@ -143,4 +167,14 @@ else{
 	<% 
 }
 %>
+</tbody>
 </table>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
