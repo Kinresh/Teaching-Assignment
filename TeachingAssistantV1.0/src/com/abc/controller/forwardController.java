@@ -150,9 +150,11 @@ public class forwardController extends HttpServlet {
 			break;
 		case "displayinputform":
 			int scheduleID = Integer.parseInt(request.getParameter("scheduleID"));
+			request.setAttribute("syID", scheduleID);
+			String scheduleName = d.getScheduleName(scheduleID);
+			request.setAttribute("scheduleName", scheduleName);
 			List<SubjectTermModel> stms = d.getSubjectTerms_scheduleID(scheduleID);
 			request.setAttribute("stms", stms);
-			request.setAttribute("syID", scheduleID);
 			subjects = d.getAllSubjects();
 			request.setAttribute("subjects", subjects);
 			terms = d.getAllTerms();
@@ -166,6 +168,8 @@ public class forwardController extends HttpServlet {
 		case "displayallfacultyselections":
 			scheduleID = Integer.parseInt(request.getParameter("scheduleID"));
 			request.setAttribute("syID", scheduleID);
+			scheduleName = d.getScheduleName(scheduleID);
+			request.setAttribute("scheduleName", scheduleName);
 			List<FacultySelectionDisplayModel> fs = d.getAllFacultySelection_scheduleID(scheduleID);
 			request.setAttribute("fs", fs);
 			terms = d.getAllTerms();

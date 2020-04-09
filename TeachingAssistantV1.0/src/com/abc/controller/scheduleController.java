@@ -53,7 +53,7 @@ public class scheduleController extends HttpServlet {
 			ScheduleModel s = new ScheduleModel(scheduleName,year);
 			b = d.addSchedule(s);
 			if (b) {
-				page = "papa.php?a=0";
+				page = "forward?q=displayallschedules&in=if";
 			} else {
 				page = "error.jsp";
 			}
@@ -64,6 +64,7 @@ public class scheduleController extends HttpServlet {
 			String[] splitresult = new String[5];
 			SubjectTermModel stm = new SubjectTermModel();
 			int scheduleID = Integer.parseInt(request.getParameter("schedule"));
+			d.emptySchedule(scheduleID);
 			String[] selection = request.getParameterValues("selection");
 			for (int i = 0; i < selection.length; i++) {
 				if (selection[i]!=null && !selection[i].equals("")) {
@@ -79,7 +80,7 @@ public class scheduleController extends HttpServlet {
 					}
 				}				
 			}
-			page = "papa.php?a=0";
+			page = "forward?q=displayallschedules&in=if";
 			break;
 
 		case "facultyselection":
@@ -108,7 +109,7 @@ public class scheduleController extends HttpServlet {
 					}
 				}
 			}
-			page = "papa.php?a=0";
+			page = "forward?q=displayallfacultyselections&scheduleID="+syID;
 			break;
 			
 		default:

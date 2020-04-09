@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintStream"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 function displayPriority(p)
@@ -25,12 +26,7 @@ function validateForm() {
 <%@page import="com.abc.model.SubjectModel"%>
 <%@page import="com.abc.model.SubjectTermModel"%>
 <%@page import="com.abc.model.PriorityModel"%>
-
 <%@page import="java.util.List"%>
-<form action="schedule" method="post">
-
-<input type="hidden" name="q" value="facultyselection" />
-
 
 <% 
 List<SubjectTermModel> stms = null;
@@ -46,17 +42,42 @@ int totalTerms = terms.size();
 int subjectID=0,web_termID=0,t=0;
 %>
 
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Preference Form - <%=request.getAttribute("scheduleName")%>
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
+<form action="schedule" method="post">
+
+<input type="hidden" name="q" value="facultyselection" />
+
 <input type="hidden" name="syID" value="<%=syID %>" />
-<table border="1">
+
+
+<table class="tablec1" border="1">
 <tr>
-<th>COURSE</th>
+<th style="width:10%;">COURSE</th>
 <%
 if(terms!=null)
 {
 for(int k=0 ; k<terms.size(); k++)
 {
 %>
-<th><%=terms.get(k).getName() %></th>
+<th style="width:30%;"><%=terms.get(k).getName() %></th>
 <%
 }
 }
@@ -85,18 +106,26 @@ for(int j=0; j<totalTerms; j++)
 		if(stms.get(c).getSubjectID() == subjectID && stms.get(c).getWeb_termsID() == web_termID)
 		{
 			%>
-			<input type="checkbox" name="selection" style="width:165px;" value="<%= stms.get(c).getStID() %>" id="<%=subjectID%>,<%=web_termID%>" onClick="displayPriority(this.id);"/>
-			<%=stms.get(c).getNotes() %>
-			<select name="priority<%= stms.get(c).getStID() %>" id="priority<%=subjectID%>,<%=web_termID%>" style="display:none;">
+			<label class="switch">
+				<input type="checkbox" name="selection" value="<%= stms.get(c).getStID() %>" id="<%=subjectID%>,<%=web_termID%>" onClick="displayPriority(this.id);"/>
+				<span class="slider round"></span>
+			</label>
+			<%if(!stms.get(c).getNotes().isEmpty() ){
+				out.print(" - "+stms.get(c).getNotes());
+			} 
+			%>
+			<select class="form-control selectc2" style="margin: auto;display: none;" name="priority<%= stms.get(c).getStID() %>" id="priority<%=subjectID%>,<%=web_termID%>" style="display:none;">
 			<option value="999">Select Priority</option>
 			<%
 			if(priorities != null)
 			{
 				for(int p = 0;p<priorities.size();p++)
 				{
+					if(!(priorities.get(p).getPriorityID() == 999)){
 				%>
 				<option value="<%=priorities.get(p).getPriorityID()%>"><%=priorities.get(p).getDescription()%></option>
 				<%
+					}
 				}
 			}
 			%>
@@ -125,8 +154,17 @@ else
 </table>
 
 
-
-<input type="submit" value="Create Form"/>
-<input type="reset" value="Cancel"/>
+<br>
+<input type="submit" class="btn btn-success" value="Submit Form"/>
+<input type="reset" class="btn btn-light" value="Reset"/>
 
 </form>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

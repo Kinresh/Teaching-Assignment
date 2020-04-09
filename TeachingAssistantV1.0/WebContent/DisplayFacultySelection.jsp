@@ -30,9 +30,29 @@ terms = (ArrayList) request.getAttribute("terms");
 int totalTerms = terms.size();
 %>
 
-<table border="1">
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Preferences For <%=request.getAttribute("scheduleName")%>
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card cardHoverRemove" style="border: 0px;">
+					<div style="padding-right: 20px;">
+						<div class=" m-t-25">
+<table border="1" class="tablec2">
+<thead>
 <tr>
-<th>FACULTY</th>
+<th style="width:15%;">FACULTY</th>
 <%
 if(terms!=null)
 {
@@ -45,8 +65,10 @@ for(int k=0 ; k<terms.size(); k++)
 }
 %>
 </tr>
+</thead>
+<tbody>
 <%
-if(fs!=null)
+if(fs.size()!=0)
 {
 List<Integer> marked = new ArrayList<>();
 for(int i=0; i<fs.size();i++)
@@ -122,10 +144,19 @@ for(int i=0; i<fs.size();i++)
 else
 {
 %>
-<tr>no records found</tr>
+<tr><td colspan="<%=totalTerms+1%>">No Records Found</td></tr>
 <%	
 }
 %>
+</tbody>
 </table>
 
 
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

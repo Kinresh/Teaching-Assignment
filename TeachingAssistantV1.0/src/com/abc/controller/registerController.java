@@ -56,6 +56,7 @@ public class registerController extends HttpServlet {
 		try {
 			HttpSession ses = request.getSession();
 			String q = request.getParameter("q");
+			q = (q==null) ? "Login" : q;
 			dao d = new daoImpl();
 			SimpleDateFormat sx = new SimpleDateFormat("yyyy-MM-dd");
 			switch (q) {
@@ -67,14 +68,13 @@ public class registerController extends HttpServlet {
 				String country = request.getParameter("country");
 				String password = request.getParameter("password");
 				String confirmPassword = request.getParameter("confirmPassword");
-				if (username == null || emailID == null || contact == null || gender == null || country == null
-						|| password == null || confirmPassword == null) {
+				if (username == null || emailID == null || contact == null || gender == null || password == null || confirmPassword == null) {
 					System.out.println("Data entry problem");
-					page = "RegisterUser.jsp";
+					page="register.php?q=signup";
 					break;
 				}
 				if (!password.equals(confirmPassword)) {
-					page = "RegisterUser.jsp";
+					page="register.php?q=signup";
 					break;
 				}
 				UserDetailsModel userDetails = new UserDetailsModel(username, emailID, password, contact, country,
@@ -87,14 +87,14 @@ public class registerController extends HttpServlet {
 				userDetails.setCreatedDate(new Date());
 				boolean isSuccess = d.insert(userDetails);
 				if (isSuccess) {
-					page="papa.php?a=101";
+					page="home";
 					
 					// page= "success.jsp";
 				} else {
-					page = "RegisterUser.jsp";
+					page="register.php?q=signup";
 				}
 				
-				response.sendRedirect(page);
+				//response.sendRedirect(page);
 				break;
 
 			case "Login":
@@ -110,17 +110,18 @@ public class registerController extends HttpServlet {
 					ses.setAttribute("name", u.getUserName());
 					ses.setAttribute("email", u.getUserEmail());
 					ses.setAttribute("role", u.getUserRole());
-					response.sendRedirect("home");
+					page="home";
+					//response.sendRedirect("home");
 					break;
 				case "unauthorized":
-					ses.setAttribute("msg", "You are Unauthorized by admin to login!!");
-
-					response.sendRedirect("register.php?q=login");
+					ses.setAttribute("msg", "You are Unauthorized by admin to login");
+					page="register.php?q=login";
+					//response.sendRedirect("register.php?q=login");
 					break;
 				case "nouserfound":
-					ses.setAttribute("msg", "Incorrect Username or Password!!");
-
-					response.sendRedirect("register.php?q=login");
+					ses.setAttribute("msg", "Incorrect Username or Password");
+					page="register.php?q=login";
+					//response.sendRedirect("register.php?q=login");
 					break;
 				default:
 					break;
@@ -153,16 +154,18 @@ public class registerController extends HttpServlet {
 					page = "error.jsp";
 				}
 				
-				response.sendRedirect(page);
+				//response.sendRedirect(page);
 				break;
 				
 			default:
 				break;
 			}
+			response.sendRedirect(page);
 			// RequestDispatcher r = request.getRequestDispatcher(page);
 			// r.forward(request, response);
 
 		} catch (Exception e) {
+			response.sendRedirect("register.php?q=login");
 			// TODO: handle exception
 		}
 	}

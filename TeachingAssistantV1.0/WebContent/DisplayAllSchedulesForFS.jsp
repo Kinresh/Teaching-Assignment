@@ -68,7 +68,28 @@ int i = 1;
 List<ScheduleModel> schedules = null;
 schedules =(ArrayList) request.getAttribute("schedules");
 %>
-<table border="1">
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Schedules
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	*Select Any Schedule To View Faculty Selections
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
+
+<table class="tablec1 sansserifc1">
 <tr>
 
 <th>SR NO.</th>
@@ -108,3 +129,11 @@ else{
 }
 %>
 </table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
