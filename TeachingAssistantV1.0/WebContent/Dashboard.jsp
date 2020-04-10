@@ -269,10 +269,10 @@
 					<div class="col-12 text-center text-white">
 						<div class="lorem_background">
 							<div>
-								<img src="img/mailbox_imgs/2.jpg" alt="lorem"
-									class="img-fluid rounded-circle lorem_img">
+								<!-- <img src="img/mailbox_imgs/2.jpg" alt="lorem"
+									class="img-fluid rounded-circle lorem_img"> -->
 							</div>
-							<div class="text-white font_18">Stuart</div>
+							<div class="text-white font_18"></div>
 							<!--<div>stuart@gmail.com</div>-->
 							<div class="text-center lorem_bg m-b-0">
 								<div class="row">

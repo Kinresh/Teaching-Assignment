@@ -1,6 +1,8 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<link type="text/css" media="css/print"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+
 function displayPriority(p)
 {
 	var s = "priority"+p;
@@ -29,13 +31,27 @@ List<TermModel> terms = null;
 terms = (ArrayList) request.getAttribute("terms");
 int totalTerms = terms.size();
 %>
-
-<header class="head">
+<style>
+	@media print{
+		.print-container-c1{
+			visibility: visible !important;
+		}
+		.nonprint-container-c1{
+			visibility: hidden !important;
+		}
+		body{
+			visibility: hidden;
+		}	
+		
+	}
+</style>
+<div class=".print-container-c1">
+<header class="head print-container-c1">
 	<div class="main-bar">
     	<div class="row no-gutters">
         	<div class="col-6">
             	<h4 class="m-t-5">
-                	<i class="fa fa-home"></i>
+                	<i class="fa fa-home nonprint-container-c1"></i>
                     	Preferences For <%=request.getAttribute("scheduleName")%>
 				</h4>
 			</div>
@@ -49,7 +65,9 @@ int totalTerms = terms.size();
 				<div class="card cardHoverRemove" style="border: 0px;">
 					<div style="padding-right: 20px;">
 						<div class=" m-t-25">
-<table border="1" class="tablec2">
+						
+<input type="button" onclick="window.print();" value="Print" />
+<table border="1" class="tablec2 print-container-c1" id="fst1">
 <thead>
 <tr>
 <th style="width:15%;">FACULTY</th>
@@ -159,4 +177,5 @@ else
 			</div>
 		</div>
 	</div>
+</div>
 </div>
