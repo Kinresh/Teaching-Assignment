@@ -13,11 +13,31 @@
 ProgramTimelineModel pt = (ProgramTimelineModel) request.getAttribute("pt");
 %>
 
+<header class="head">
+	<div class="main-bar">
+    	<div class="row no-gutters">
+        	<div class="col-6">
+            	<h4 class="m-t-5">
+                	<i class="fa fa-home"></i>
+                    	Update Program Timeline Details
+				</h4>
+			</div>
+		</div>
+	</div>                    
+</header>
+<div class="outer">
+	<div class="inner bg-container">
+    	<div class="row">
+			<div class="col-12 data_tables">
+				<div class="card">
+					<div class="card-body p-t-10">
+						<div class=" m-t-25">
 
 <form action="subject" method="post">
 <input type="hidden" name="ptID" value="<%=pt.getPtID()%>"/>
 
-<select name="programID">
+Select Program:
+<select name="programID" class="form-control selectc1">
 <option value="">Select program</option>
 <%
 List<ProgramModel> programs = null;
@@ -42,7 +62,11 @@ for(int k = 0;k<programs.size();k++)
 }
 %>
 </select>
-<select name="startingTerm">
+<div class="spacec1"></div>
+
+Select Term:
+
+<select name="startingTerm" class="form-control selectc1">
 <option value="">Select Term</option>
 <%
 	if(pt.getStartingTerm().equals("winter"))
@@ -87,12 +111,25 @@ for(int k = 0;k<programs.size();k++)
 	}
 %>
 </select>
-<input type="text" name="startingYear" value=<%= pt.getStartingYear() %> placeholder="Enter Starting Year. e.g.2020"/>
-
+<br>
+<br>
+Year:
+<input type="text" name="startingYear" class="widthc1 form-control" style="margin-left: 65px;" value=<%= pt.getStartingYear() %> placeholder="Enter Starting Year. e.g.2020"/>
+<br>
+<br>
 <input type="hidden" name="q" value="updateprogramtimeline"/>
-<input type="submit" value="Update" />
-<input type="reset" value="Reset" />
+<input type="submit" class="btn btn-success" value="Update" />
+<input type="reset" class="btn btn-light" value="Reset" />
 </form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 </body>
 </html>

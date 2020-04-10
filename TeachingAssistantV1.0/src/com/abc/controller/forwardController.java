@@ -39,6 +39,8 @@ public class forwardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try{
+			
 		String q = request.getParameter("q");
 		dao d = new daoImpl();
 		int userid=0,id=0;
@@ -183,6 +185,11 @@ public class forwardController extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
+		
+		} catch (Exception e) {
+			System.out.println(e);
+			response.sendRedirect("home");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

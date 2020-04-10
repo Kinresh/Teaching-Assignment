@@ -131,7 +131,7 @@ for(int i=0; i<fs.size();i++)
 			}
 			else
 			{
-				p=p.concat(";"+l.get(c).getSubjectCode());
+				p=p.concat("; "+l.get(c).getSubjectCode());
 			} 
 		}
 

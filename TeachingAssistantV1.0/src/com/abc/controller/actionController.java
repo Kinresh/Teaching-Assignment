@@ -22,6 +22,8 @@ public class actionController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
+			
 		String q = request.getParameter("q");
 		dao d = new daoImpl();
 		int userid=0,id=0;
@@ -33,7 +35,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallusers");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "enableaccount":
@@ -42,7 +44,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallusers");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "disableaccount":
@@ -51,7 +53,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallusers");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "multipledeleteaccounts":
@@ -66,7 +68,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallusers");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "deletesubject":
@@ -75,7 +77,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallsubjects");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "enablesubject":
@@ -84,7 +86,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallsubjects");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "disablesubject":
@@ -93,7 +95,7 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallsubjects");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case "multipledeletesubjects":
@@ -108,11 +110,15 @@ public class actionController extends HttpServlet {
 			if (b) {
 				response.sendRedirect("forward?q=displayallsubjects");
 			} else {
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		default:
 			break;
+		}
+		} catch (Exception e) {
+			System.out.println(e);
+			response.sendRedirect("home");
 		}
 	}
 

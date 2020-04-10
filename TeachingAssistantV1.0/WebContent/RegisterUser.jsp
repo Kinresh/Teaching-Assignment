@@ -33,7 +33,8 @@
                 <div class="col-lg-5 col-sm-12  col-md-8 mx-auto">
                     <div class="login_logo login_border_radius1">
                         <h3 class="text-center">
-                            <img src="img/logow2.png" alt="josh logo" class="admire_logo"><span class="text-white"> ADMIRE<br/>
+                            <img src="img/uwindsor_shield.svg" style="margin-right: -8px;padding: 2px;" alt="josh logo" class="admire_logo">
+                            <span class="text-white"> Teaching Assignment &nbsp;<br/>
                                 Sign Up</span>
                         </h3>
                     </div>

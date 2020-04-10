@@ -30,7 +30,9 @@ public class fileController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		try{
+			
+		
 		List<userModel> l = null;
 		short a = Short.parseShort(request.getParameter("a"));
 		//System.out.println("This is Case a in filecontroller get::"+a);
@@ -114,7 +116,12 @@ public class fileController extends HttpServlet {
 
 		RequestDispatcher rd1 = request.getRequestDispatcher(h);
 		rd1.forward(request, response);
-
+		
+		} catch (Exception e) {
+			System.out.println(e);
+			response.sendRedirect("home");
+		}
 	}
+		
 
 }
