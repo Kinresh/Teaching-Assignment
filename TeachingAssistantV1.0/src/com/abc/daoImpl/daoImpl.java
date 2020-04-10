@@ -1133,7 +1133,7 @@ public class daoImpl implements dao {
 						+ "left join demo.subjects as c on c.subjectID = b.subjectID "
 						+ "left join demo.web_priorities as d on d.priorityID=a.priorityID "
 						+ "left join demo.users as e on e.userID = a.userID "
-						+ "where a.syID='"+scheduleID+"'");
+						+ "where a.syID='"+scheduleID+"' order by c.subjectCode");
 				if (rs != null) {
 					while (rs.next()) {
 						m = new FacultySelectionDisplayModel(
