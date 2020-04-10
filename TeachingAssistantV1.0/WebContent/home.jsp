@@ -230,21 +230,21 @@
                     <li class="dropdown_menu">
                         <a href="javascript:;">
                             <i class="fa fa-th-large"></i>
-                            <span class="link-title menu_hide">&nbsp; Input Form</span>
+                            <span class="link-title menu_hide">&nbsp; Preference Form</span>
                             <span class="fa arrow menu_hide"></span>
                         </a>
                         <ul>
                             <li>
 	                            <a href="forward?q=displayallschedules&in=if">
 	                            	<i class="fa fa-angle-right"></i>
-		                            &nbsp; Display All Input Forms
+		                            &nbsp; Display All Preference Forms
 	                            </a>
                             </li>
                             <c:if test="${sessionScope.role eq 'admin'}">
 							<li>
 								<a href="forward?q=addnewinputform">
 									<i class="fa fa-angle-right"></i>
-	                            	&nbsp; Add New Input Form
+	                            	&nbsp; Add New Preference Form
 								</a>
 							</li>
 							</c:if>

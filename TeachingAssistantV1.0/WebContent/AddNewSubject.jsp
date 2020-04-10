@@ -29,7 +29,7 @@ Description:
 <input type="text" name="subjectDescription" class="form-control widthc1" style="margin-left:17px;" placeholder="Enter Subject Description"/>
 <div class="spacec1"></div>
 Instructors:
-<input type="text" name="maxInstructor" class="form-control widthc1" style="margin-left:25px;" placeholder="Max. No. of Instructors"/>
+<input type="text" name="maxInstructor" value="1" class="form-control widthc1" style="margin-left:25px;" placeholder="Max. No. of Instructors"/>
 
 <input type="hidden" name="q" value="addnewsubject"/>
 <br>

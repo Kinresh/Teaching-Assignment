@@ -87,8 +87,16 @@ public class registerController extends HttpServlet {
 				userDetails.setCreatedDate(new Date());
 				boolean isSuccess = d.insert(userDetails);
 				if (isSuccess) {
+
+					UserDetailsModel u = new UserDetailsModel(username,password);
+					List dataList = d.VerifyUser(u);
+					u = (UserDetailsModel) dataList.get(1);
+					ses.setAttribute("id", u.getUserID());
+					ses.setAttribute("name", u.getUserName());
+					ses.setAttribute("email", u.getUserEmail());
+					ses.setAttribute("role", u.getUserRole());
 					page="home";
-					
+					//response.sendRedirect("home");								
 					// page= "success.jsp";
 				} else {
 					page="register.php?q=signup";

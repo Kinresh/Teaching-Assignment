@@ -29,8 +29,9 @@ public class insertController extends HttpServlet {
         
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
-		{
+		try{
+			
+			
 		int a =Integer.parseInt(request.getParameter("a"));
 		//System.out.println("This is Case a in insertcontroller get::"+a);
 		dao d=new daoImpl();
@@ -52,7 +53,7 @@ public class insertController extends HttpServlet {
 				response.sendRedirect("papa.php?a=3");
 			}
 			else{
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case 1:
@@ -63,7 +64,7 @@ public class insertController extends HttpServlet {
 				response.sendRedirect("papa.php?a=3");
 			}
 			else{
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case 2:
@@ -74,7 +75,7 @@ public class insertController extends HttpServlet {
 				response.sendRedirect("papa.php?a=4");
 			}
 			else{
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case 3:
@@ -85,7 +86,7 @@ public class insertController extends HttpServlet {
 				response.sendRedirect("papa.php?a=3");
 			}
 			else{
-				response.sendRedirect("error.jsp");
+				response.sendRedirect("home");
 			}
 			break;
 		case 61:
@@ -110,7 +111,8 @@ public class insertController extends HttpServlet {
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-			HttpSession ses = request.getSession();
+		
+		HttpSession ses = request.getSession();
 		String a = request.getParameter("action");
 		//System.out.println("This is action in insertcontroller post::"+a);
 		SimpleDateFormat vf = new SimpleDateFormat("yyyy-MM-dd");
@@ -289,10 +291,9 @@ public class insertController extends HttpServlet {
 			break;
 		}
 		
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("home");
 		}
 		
 		

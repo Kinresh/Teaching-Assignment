@@ -43,6 +43,9 @@ public class scheduleController extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{
+			
+			
 		String q = request.getParameter("q");
 		dao d = new daoImpl();
 		boolean b= false;
@@ -55,7 +58,7 @@ public class scheduleController extends HttpServlet {
 			if (b) {
 				page = "forward?q=displayallschedules&in=if";
 			} else {
-				page = "error.jsp";
+				page = "home";
 			}
 			break;
 		case "addnewinputform":
@@ -75,7 +78,7 @@ public class scheduleController extends HttpServlet {
 					stm = new SubjectTermModel(subjectID,web_termsID,scheduleID,note);
 					b = d.addSubjectTerm(stm);
 					if (!b) {
-						page = "error.jsp";
+						page = "home";
 						break;
 					}
 				}				
@@ -104,7 +107,7 @@ public class scheduleController extends HttpServlet {
 					
 					b = d.addNewFacultySelection(fs);
 					if (!b) {
-						page = "error.jsp";
+						page = "home";
 						break;
 					}
 				}
@@ -116,6 +119,11 @@ public class scheduleController extends HttpServlet {
 			break;
 		}
 		response.sendRedirect(page);
+		
+		} catch (Exception e) {
+			System.out.println(e);
+			response.sendRedirect("home");
+		}
 	}
 
 }
